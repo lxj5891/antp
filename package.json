@@ -1,0 +1,25 @@
+{
+  "name": "antp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "datastore-fs": "^0.4.2",
+    "ipfs-repo": "^0.18.6",
+    "libp2p": "file:lib/js-libp2p",
+    "libp2p-floodsub": "^0.13.1",
+    "libp2p-kad-dht": "^0.6.0",
+    "libp2p-mdns": "^0.9.1",
+    "libp2p-multiplex": "^0.5.1",
+    "libp2p-railing": "^0.7.1",
+    "libp2p-secio": "^0.9.0",
+    "libp2p-tcp": "^0.11.2",
+    "libp2p-websockets": "^0.10.4",
+    "peer-info": "^0.11.4"
+  }
+}
