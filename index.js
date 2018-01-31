@@ -6,11 +6,14 @@ const WS = require('libp2p-websockets')
 const Multiplex = require('libp2p-multiplex')
 const SECIO = require('libp2p-secio')
 const PeerInfo = require('peer-info')
+const Railing = require('libp2p-railing')
 const MulticastDNS = require('libp2p-mdns')
 const waterfall = require('async/waterfall')
 const parallel = require('async/parallel')
 const Pushable = require('pull-pushable')
 const pull = require('pull-stream')
+
+var dgram = require('dgram')
 
 console.log(process.argv);
 const portIndex = process.argv.indexOf('-p');
@@ -19,7 +22,24 @@ const masterIndex = process.argv.indexOf('-m');
 const isMaster = process.argv[masterIndex + 1];
 const nickIndex = process.argv.indexOf('-n');
 const nick = process.argv[nickIndex + 1];
-console.log('port:', port)
+const hostIndex = process.argv.indexOf('--host');
+const host = hostIndex !== -1 ? process.argv[hostIndex + 1] : null;
+const bootstraperIndex = process.argv.indexOf('--bootstraper');
+const bootstraper = bootstraperIndex !== -1 ? process.argv[bootstraperIndex + 1] : null;
+
+const bootstrapers = [
+  "/ip4/30.55.196.148/tcp/1337/ipfs/QmT5hJzccLd1CGhhfktd7PvRqAeiFNpSSxjdds8cPf3cNK"
+]
+
+dgram
+const discoveryParams = function (peerInfo) {
+  const parms = [new MulticastDNS(peerInfo, { interval: 5000 })];
+  if (bootstraper) {
+    bootstrapers.push(bootstraper);
+    parms.push(new Railing(bootstrapers))
+  }
+  return parms
+}
 
 class MyBundle extends libp2p {
   constructor(peerInfo) {
@@ -32,7 +52,7 @@ class MyBundle extends libp2p {
         muxer: [Multiplex],
         crypto: [SECIO]
       },
-      discovery: [new MulticastDNS(peerInfo, { interval: 5000 })]
+      discovery: discoveryParams(peerInfo)
     }
     super(modules, peerInfo)
   }
@@ -45,6 +65,11 @@ function createNode(callback) {
     (cb) => PeerInfo.create(cb),
     (peerInfo, cb) => {
       peerInfo.multiaddrs.add(`/ip4/0.0.0.0/tcp/${port}`);
+      // console.log('%%%%%%%%%%%%%%%%%%%%%');
+      // console.log(host);
+      // if (host) {
+      //   peerInfo.multiaddrs.add(`/ip4/${host}/tcp/${port}`);
+      // }
       node = new MyBundle(peerInfo)
       node.start(cb)
     }
@@ -106,7 +131,7 @@ const endOne = (command) => {
 }
 
 const endAll = () => {
-  for (var i in nameList)  {
+  for (var i in nameList) {
     const peerId = nameList[i];
     const p = peerConnSet[peerId].p;
     p.end();
@@ -136,7 +161,7 @@ function messageAll(command) {
     return;
   }
   const msg = commandList[1];
-  for (var i in nameList)  {
+  for (var i in nameList) {
     const peerId = nameList[i];
     const p = peerConnSet[peerId].p;
     p.push(msg);
@@ -183,7 +208,7 @@ function start() {
         pull.map((data) => {
           return data.toString('utf8').replace('\n', '')
         }),
-        pull.drain(function(data) {
+        pull.drain(function (data) {
           const namespace = data.split(',');
           const clientNick = namespace[0];
           const clientPeerId = namespace[1];
@@ -194,7 +219,7 @@ function start() {
             if (err) {
               throw err
             }
-            
+
             const p = Pushable()
             // Write operation. Data sent as a buffer
             pull(

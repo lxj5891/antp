@@ -1,0 +1,123 @@
+{
+  "id": 0,
+  "type": "response",
+  "flags": 1024,
+  "flag_qr": true,
+  "opcode": "QUERY",
+  "flag_auth": true,
+  "flag_trunc": false,
+  "flag_rd": false,
+  "flag_ra": false,
+  "flag_z": false,
+  "flag_ad": false,
+  "flag_cd": false,
+  "rcode": "NOERROR",
+  "questions": [],
+  "answers": [
+    {
+      "name": "_ipfs-discovery._udp",
+      "type": "PTR",
+      "class": 1,
+      "ttl": 120,
+      "flush": false,
+      "data": "Qmc7stqdvMr2ipvC47QsPr9Zape2UtsFHoPbTmLTWjKhC1._ipfs-discovery._udp"
+    },
+    {
+      "name": "Qmc7stqdvMr2ipvC47QsPr9Zape2UtsFHoPbTmLTWjKhC1._ipfs-discovery._udp",
+      "type": "SRV",
+      "class": 1,
+      "ttl": 120,
+      "flush": false,
+      "data": {
+        "priority": 10,
+        "weight": 1,
+        "port": 10222,
+        "target": "AntonydeMacBook-Pro-25648.local"
+      }
+    },
+    {
+      "name": "Qmc7stqdvMr2ipvC47QsPr9Zape2UtsFHoPbTmLTWjKhC1._ipfs-discovery._udp",
+      "type": "TXT",
+      "class": 1,
+      "ttl": 120,
+      "flush": false,
+      "data": {
+        "type": "Buffer",
+        "data": [
+          81,
+          109,
+          99,
+          55,
+          115,
+          116,
+          113,
+          100,
+          118,
+          77,
+          114,
+          50,
+          105,
+          112,
+          118,
+          67,
+          52,
+          55,
+          81,
+          115,
+          80,
+          114,
+          57,
+          90,
+          97,
+          112,
+          101,
+          50,
+          85,
+          116,
+          115,
+          70,
+          72,
+          111,
+          80,
+          98,
+          84,
+          109,
+          76,
+          84,
+          87,
+          106,
+          75,
+          104,
+          67,
+          49
+        ]
+      }
+    },
+    {
+      "name": "AntonydeMacBook-Pro-25648.local",
+      "type": "A",
+      "class": 1,
+      "ttl": 120,
+      "flush": false,
+      "data": "127.0.0.1"
+    },
+    {
+      "name": "AntonydeMacBook-Pro-25648.local",
+      "type": "A",
+      "class": 1,
+      "ttl": 120,
+      "flush": false,
+      "data": "192.168.199.143"
+    },
+    {
+      "name": "AntonydeMacBook-Pro-25648.local",
+      "type": "A",
+      "class": 1,
+      "ttl": 120,
+      "flush": false,
+      "data": "30.39.4.188"
+    }
+  ],
+  "authorities": [],
+  "additionals": []
+}

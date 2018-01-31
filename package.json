@@ -10,8 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "datastore-fs": "^0.4.2",
+    "idevice-browser": "^1.1.0",
     "ipfs-repo": "^0.18.6",
-    "libp2p": "file:lib/js-libp2p",
+    "libp2p": "^0.15.2",
     "libp2p-floodsub": "^0.13.1",
     "libp2p-kad-dht": "^0.6.0",
     "libp2p-mdns": "^0.9.1",

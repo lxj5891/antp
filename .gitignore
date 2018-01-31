@@ -54,3 +54,4 @@ run
 
 /.ipfs/**
 /lib/js-libp2p/**
+package-lock.json
